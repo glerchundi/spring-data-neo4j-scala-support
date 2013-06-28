@@ -1,9 +1,8 @@
-package org.itspunchy.data.support.spring.neo4j.config
+package org.springframework.data.neo4j.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.convert.converter.{Converter, ConverterRegistry}
-import org.springframework.data.neo4j.config.Neo4jConfiguration
 import org.springframework.data.neo4j.fieldaccess.CustomNodeDelegatingFieldAccessorFactory
 import org.springframework.data.neo4j.fieldaccess.CustomRelationshipDelegatingFieldAccessorFactory
 import org.springframework.data.neo4j.fieldaccess.FieldAccessorFactoryFactory;
