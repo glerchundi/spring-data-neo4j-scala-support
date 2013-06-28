@@ -12,4 +12,4 @@ This library is an extension for spring-data-neo4j which supports some scala com
 
 This library is in its early stage so, DO NOT USE IN PRODUCTION.
 
-Please in order to learn how to use it, take a look at this [sample](https://github.com/glerchundi/spring-data-neo4j-scala-support/).
+Please in order to learn how to use it, take a look at this [sample](https://github.com/glerchundi/spring-data-neo4j-scala-support-sample/).
