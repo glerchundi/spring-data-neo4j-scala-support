@@ -38,13 +38,7 @@ abstract class CustomNeo4jConfiguration extends Neo4jConfiguration {
     List(
       // UUID
       new Converter[UUID, JString] { def convert(s: UUID): JString = s.toString() },
-      new Converter[JString, UUID] { def convert(s: JString): UUID = UUID.fromString(s) },
-
-      // scala.Int
-      new Converter[Int, JString] { def convert(s: Int): JString = s.toString },
-      new Converter[JString, Int] { def convert(s: JString): Int = s.toInt },
-      new Converter[Int, JInt] { def convert(s: Int): JInt = s },
-      new Converter[JInt, Int] { def convert(s: JInt): Int = s }
+      new Converter[JString, UUID] { def convert(s: JString): UUID = UUID.fromString(s) }
     )
   }
 

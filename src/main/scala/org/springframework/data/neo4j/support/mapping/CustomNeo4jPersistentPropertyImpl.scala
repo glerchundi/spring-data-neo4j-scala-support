@@ -19,16 +19,21 @@ class CustomNeo4jPersistentPropertyImpl(
   lazy val optionClazz      = Class.forName("scala.Option")
   lazy val traversableClazz = Class.forName("scala.collection.Iterable")
 
-  override def isSerializablePropertyField(conversionService: ConversionService) = {
-    super.isSerializablePropertyField(conversionService) || {
-      val dstType = getPropertyType
-      val srcType =
-        information.getType match {
-          case t if traversableClazz.isAssignableFrom(t)  => information.getComponentType.getType
-          case t if optionClazz.isAssignableFrom(t)       => information.getComponentType.getType
-          case t                                          => t
-        }
-      conversionService.canConvert(srcType, dstType) && conversionService.canConvert(dstType, srcType)
+  override def isSerializablePropertyField(conversionService: ConversionService): Boolean = {
+    if (isRelationship){
+      false
+    }
+    else{
+      super.isSerializablePropertyField(conversionService) || {
+        val dstType = getPropertyType
+        val srcType =
+          information.getType match {
+            case t if traversableClazz.isAssignableFrom(t) => information.getComponentType.getType
+            case t if optionClazz.isAssignableFrom(t) => information.getComponentType.getType
+            case t => t
+          }
+        conversionService.canConvert(srcType, dstType) && conversionService.canConvert(dstType, srcType)
+      }
     }
   }
 

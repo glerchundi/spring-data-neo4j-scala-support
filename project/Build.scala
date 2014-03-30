@@ -11,7 +11,7 @@ object ApplicationBuildSettings {
 
     val spring = new {
       val data = new {
-        val neo4j         = "2.1.0.RELEASE"
+        val neo4j         = "3.0.0.RELEASE"
       }
     }
     

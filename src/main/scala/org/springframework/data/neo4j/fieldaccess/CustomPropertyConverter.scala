@@ -28,9 +28,19 @@ class CustomPropertyConverter(conversionService: ConversionService, property: Ne
   }
 
   private def serializePropertyValueFromOption(value: Option[_]): AnyRef = {
-    value
-      .getOrElse(null)
-      .asInstanceOf[AnyRef]
+    value match {
+      case None => null
+      case Some(innerValue) => {
+        val targetClazz = property.getPropertyType
+        val result = if (conversionService.canConvert(innerValue.getClass, targetClazz)) {
+          conversionService.convert(innerValue, targetClazz)
+        }
+        else {
+          innerValue
+        }
+        result.asInstanceOf[AnyRef]
+      }
+    }
   }
 
   private def deserializePropertyValueToSeq(values: Array[AnyRef]): AnyRef = {
@@ -50,7 +60,15 @@ class CustomPropertyConverter(conversionService: ConversionService, property: Ne
   }
 
   private def deserializePropertyValueToOption(value: AnyRef): AnyRef = {
-    Some(value)
+    val actualType = information.getActualType.getType
+    val valueToWrap = if (conversionService.canConvert(value.getClass, actualType)) {
+      conversionService.convert(value, actualType)
+    }
+    else {
+      value
+    }
+
+    Some(valueToWrap)
       .asInstanceOf[AnyRef]
   }
 
